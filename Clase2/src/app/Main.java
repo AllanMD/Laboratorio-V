@@ -1,10 +1,14 @@
-package app;
+package App;
 
-import clases.Persona;
+import Clases.Persona;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static java.util.Comparator.comparingInt;
 
 public class Main {
 
@@ -37,9 +41,25 @@ public class Main {
 
         System.out.println("---------MAYORES A 21 + DNI >20000000 -------------------");
         System.out.println(String.format("MAYORES A 21 + DNI >20000000: %s",personas.stream()
-                .filter(persona->persona.getEdad() > 21 && persona.getDni()>20000000)
+                .filter(persona->persona.getEdad() > 21 && persona.getDni()>20000000).
                 //.filter( persona->persona.getDni() >20000000) // tambien funciona con este
-                .collect(Collectors.toList())));
+                collect(Collectors.toList())));
 
+
+        List <Integer> numeros = Arrays.asList(4,2,8,1);
+        /*lo mismo que hacer new arraylist y hacer los numeros.add:
+        numeros.add(4);
+        numeros.add(2);
+        numeros.add(8);
+        numeros.add(1); */
+
+        Long hola = numeros.stream().filter(numero->numero > 5).count();
+
+        System.out.println("ordenados:");
+        numeros.stream().sorted().forEach(System.out::println);
+
+        numeros.sort();
+
+        System.out.println("numeroooo:" + hola);
     }
 }
