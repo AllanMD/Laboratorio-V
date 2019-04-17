@@ -23,10 +23,10 @@ Es decir a bloques de código más pequeños mayor es la posibilidad de reutilizaci
 
 Explique los siguientes goals de Maven: [Clean, Package, Install, Compile]
 - Un Goal no es mas que un comando que recibe maven como parámetro para que haga algo.
-mvn clean: limpia todas las clases compiladas del proyecto.
-mvn compile: compila el proyecto
-mvn package: empaqueta el proyecto (si es un proyecto java simple, genera un jar, si es un proyecto web, un war, etc…)
-mvn install: instala el artefacto en el repositorio local (/Users/home/.m2)
+- mvn clean: limpia todas las clases compiladas del proyecto.
+- mvn compile: compila el proyecto
+- mvn package: empaqueta el proyecto (si es un proyecto java simple, genera un jar, si es un proyecto web, un war, etc…)
+- mvn install: instala el artefacto en el repositorio local (/Users/home/.m2)
 
 Explique los siguientes Scopes [Compile, Provider, Runtime, Test, System]
 - El scope sirve para indicar el alcance de nuestra dependencia y su transitividad.
