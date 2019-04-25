@@ -36,6 +36,11 @@ public class Connect {
 
             stat.executeUpdate(query);
 
+            query = "CREATE TABLE IF NOT EXISTS words ("
+                    + " word VARCHAR(60));";
+
+            stat.executeUpdate(query);
+
         } catch (ClassNotFoundException e){
             System.out.println("La libreria SQL no se agrego correctamente");
             e.printStackTrace();

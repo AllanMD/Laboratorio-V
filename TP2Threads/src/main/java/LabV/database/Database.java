@@ -63,20 +63,20 @@ public class Database {
         }
     }
 
-    public static List<String> readWords(){
+    public static String readWord(){
         Connection conn = Connect.connect();
-        String sql = "Select * from words";
-        List<String> words = new ArrayList<>();
+        String sql = "SELECT * FROM words ORDER BY RAND() LIMIT 1";
+        String word = null;
         try{
             Statement stm = conn.createStatement();
             ResultSet result = stm.executeQuery(sql);
             while (result.next()){
-                words.add(result.getString("word"));
+               word = result.getString("word");
             }
         } catch (SQLException e){
             e.printStackTrace();
         }
-        return words;
+        return word;
     }
 
 
