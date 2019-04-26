@@ -18,16 +18,31 @@ public class Hangman {
         return letter;
     }
 
-    public static Winner play (Player p1, Player p2){
+
+    public static boolean wordIsComplete(String word){ //if the player completed the word, it returns true, else false
+        boolean flag = true;
+
+        for (int i = 0; i < word.length();i++){
+            if (word.charAt(i) != '*'){
+                flag = false;
+            }
+        }
+        return flag;
+    }
+    public static void play (Player p1, Player p2){
 
         generateRandomWord();
+        System.out.println("-------------\n La PALABRA A ADIVINAR ES: " + word.toUpperCase() + "\n-----------------");
         p1.setWordToGuess(word);
         p2.setWordToGuess(word);
-        p1.start();
-        p2.start();
 
+            p1.start();
+            p2.start();
 
-        return winner;
+        System.out.println("final");
+        //System.out.println("El ganador es:" + winner.toString());
+        //return winner;
     }
+
 
 }

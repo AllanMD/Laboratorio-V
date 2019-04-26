@@ -37,4 +37,13 @@ public class Winner {
     public void setWord(String word) {
         this.word = word;
     }
+
+    @Override
+    public String toString() {
+        return "Winner{" +
+                "name='" + name + '\'' +
+                ", date=" + date +
+                ", word='" + word + '\'' +
+                '}';
+    }
 }
