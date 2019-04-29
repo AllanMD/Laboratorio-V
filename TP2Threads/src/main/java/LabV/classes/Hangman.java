@@ -2,24 +2,36 @@ package LabV.classes;
 
 import LabV.database.Database;
 
+import java.util.Random;
+
 public class Hangman {
 
-    static String word;
-    static boolean ended = Boolean.FALSE;
-    static Winner winner; //?
+    private String wordToGuess;
+    private boolean ended = Boolean.FALSE;
+    private Winner winner;//
+    private boolean playing;
+    private String usedLetters;
 
-    public static void generateRandomWord(){
-        word = Database.readWord().toLowerCase();
+    public Hangman() {
+        wordToGuess = generateRandomWord();
+        winner = null;
+        playing = Boolean.FALSE;
+        usedLetters = new String();
     }
 
-    public static char randomLetter(){
-        //ascii code: a-z = 97 a 122
-        char letter = (char) (Math.random() * 122 + 97); // char  between 97 and 122 - a and z
+    public String generateRandomWord(){
+        String randomWord = Database.readWord().toLowerCase();
+        return randomWord;
+    }
+
+    public char randomLetter(){
+        Random r = new Random();
+        char letter = (char)(r.nextInt(26) + 'a'); // stackoverflow
         return letter;
     }
 
 
-    public static boolean wordIsComplete(String word){ //if the player completed the word, it returns true, else false
+    public boolean wordIsComplete(String word){ //if the player completed the word, it returns true, else false
         boolean flag = true;
 
         for (int i = 0; i < word.length();i++){
@@ -29,20 +41,64 @@ public class Hangman {
         }
         return flag;
     }
-    public static void play (Player p1, Player p2){
 
-        generateRandomWord();
-        System.out.println("-------------\n La PALABRA A ADIVINAR ES: " + word.toUpperCase() + "\n-----------------");
-        p1.setWordToGuess(word);
-        p2.setWordToGuess(word);
 
-            p1.start();
-            p2.start();
+    public synchronized boolean play(String name){
 
-        System.out.println("final");
-        //System.out.println("El ganador es:" + winner.toString());
-        //return winner;
+
+         boolean won = Boolean.FALSE;
+
+         while (playing) {
+             try {
+                 wait();
+             } catch (InterruptedException e) {
+                 e.printStackTrace();
+             }
+         }
+
+         playing = Boolean.TRUE;
+
+         if (!ended) {
+             boolean flag = false;
+             Character letter = null;
+             while (flag == false) {
+                 letter = randomLetter();
+                 if (usedLetters.contains(letter.toString().toLowerCase())) {
+                     flag = false;
+                 } else {
+                     usedLetters = usedLetters.concat(letter.toString().toLowerCase());
+                     flag = true;
+                 }
+             }
+
+             System.out.println(name + " intenta con la letra: " + letter);
+
+             if (wordToGuess.contains(letter.toString().toLowerCase())) {
+                 wordToGuess = wordToGuess.replaceAll(letter.toString(), "*");
+             }
+
+             if (wordIsComplete(wordToGuess)) {
+                 ended = Boolean.TRUE;
+                 won = Boolean.TRUE;
+                 usedLetters = new String();
+             }
+         }
+
+         playing = Boolean.FALSE;
+         notifyAll();
+
+        return won;
     }
 
+    public boolean isEnded() {
+        return ended;
+    }
 
+    public void setWinner(Winner winner) {
+        this.winner = winner;
+    }
+
+    public void setWordToGuess(String wordToGuess) {
+        this.wordToGuess = wordToGuess;
+    }
 }
