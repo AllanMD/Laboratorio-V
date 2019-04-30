@@ -1,5 +1,5 @@
 # TP 2 Threads
-___
+
 ### Diferencia entre Runnable y Thread
 Las principales diferencias son:  
 - Si extendemos de la clase Thread, perdemos la oportunidad de poder extender de otra clase, ya que Java no admite herencia multiple. En cambio, si se implementa la interfaz Runnable, si se puede extender de otra clase.
@@ -24,3 +24,8 @@ Un thread puede presentar cuatro estados distintos:
 
 ___
 ### Explique los siguientes metodos: [start, sleep, yield, join]
+
+- start(): Inicializa el thread y hace que ejecute lo que esta dentro del metodo run()
+- sleep(): Le dice al thread que duerma durante los milisegundos específicados. De esta forma pausamos por determinado tiempo un thread, y atrasamos su ejecucion. sleep() no consume recursos del sistema mientras el thread duerme.
+- yield(): Mueve al thread que se esta ejecutando al final de la cola de procesos en espera por la CPU, para permitir la ejecucion de otros hilos (regresa al estado "listo para ejecutar").
+- join(): Para indicar a un thread que debe esperar a que el hilo en ejecucion termine para poder empezar.

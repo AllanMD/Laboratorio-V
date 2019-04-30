@@ -25,7 +25,7 @@ public class Player extends Thread{
         while (!hangman.isEnded()){
             won = hangman.play(name);
             try {
-                Thread.sleep(10); // para que? // si lo pongo en Hangman.play el comportamiento es distinto
+                Thread.sleep(10); // para darle oportunidad al otro jugador de tambien jugar
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
