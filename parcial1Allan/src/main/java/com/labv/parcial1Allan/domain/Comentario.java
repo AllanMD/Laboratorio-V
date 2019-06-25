@@ -38,7 +38,7 @@ public class Comentario {
 
     static int TIEMPO_LIMITE;
 
-    @Scheduled(fixedRate = TIEMPO_LIMITE)
+    @Scheduled(fixedRate = 50) // TIEMPO-LIMITE SACADO PARA PODER CORRER EL PROGRAMA
     public void eliminarComentariosSchedule (){
 
         ComentarioController comentarioController = new ComentarioController();

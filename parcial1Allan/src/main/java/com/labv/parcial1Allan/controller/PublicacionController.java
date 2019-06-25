@@ -3,6 +3,8 @@ package com.labv.parcial1Allan.controller;
 
 import com.labv.parcial1Allan.domain.Publicacion;
 import com.labv.parcial1Allan.domain.Usuario;
+import com.labv.parcial1Allan.repository.ComentariosPorPublicaciones;
+import com.labv.parcial1Allan.repository.ComentariosPorPublicacionesDTO;
 import com.labv.parcial1Allan.repository.PublicacionesRepository;
 import com.labv.parcial1Allan.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +43,15 @@ public class PublicacionController {
     @GetMapping("")
     public List<Publicacion> readAllPublicaciones(){
         return publicacionesRepository.findAll();
+    }
+
+    @GetMapping("/projection")
+    public List<ComentariosPorPublicaciones> getComentariosPorPublicaciones(){
+        return publicacionesRepository.getComentariosPorPublicaciones();
+    }
+
+    @GetMapping("/nativeQueryDTO")
+    public List<ComentariosPorPublicacionesDTO> getComentariosPorPublicacionesDTO(){
+        return publicacionesRepository.getComentariosPorPublicacionesDTO();
     }
 }
